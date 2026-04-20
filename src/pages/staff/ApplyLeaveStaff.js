@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import DashboardLayout from '../../components/layout/DashboardLayout';
 import { db } from '../../data/mockData';
 import { useAuth } from '../../contexts/AuthContext';
@@ -11,16 +11,16 @@ const ApplyLeaveStaff = () => {
     const [myRequests, setMyRequests] = useState([]);
 
     // All fetching and submitting logic remains the same
-    const fetchHistory = () => {
+    const fetchHistory = useCallback(() => {
         if(user) {
             const allRequests = db.get('leaveRequests');
             setMyRequests(allRequests.filter(req => req.userId === user.username));
         }
-    };
+    }, [user, setMyRequests]);
 
     useEffect(() => {
         fetchHistory();
-    }, [user]);
+    }, [fetchHistory]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

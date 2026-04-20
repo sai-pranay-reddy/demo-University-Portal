@@ -25,7 +25,6 @@ const UpdateResult = () => {
         if (user) {
             // --- 1. Load all raw data from the "database" ---
             const allStudents = db.get('students');
-            const allSubjectsRaw = db.get('subjects'); // This is likely empty, we'll build it
             const allResults = db.get('results');
             const timetable = db.get('timetable');
 
